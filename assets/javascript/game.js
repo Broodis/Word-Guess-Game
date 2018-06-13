@@ -81,6 +81,29 @@ function checkIncorrect(letter) {
         // Write guesses left to DOM
         $guessesLeft.textContent = guessesLeft;
     }
+    checkLoss();
+}
+
+// Check for losses function
+function checkLoss() {
+    if (guessesLeft === 0) {
+        losses++;
+        gameRunning = false;
+        $losses.textContent = losses;
+        $placeholders.textContent = pickedWord;
+    }
+    // Run checkWin function after checkLoss function
+    checkWin();
+}
+
+// Check for Wins function
+function checkWin() {
+    if (pickedWord.toLowerCase() === pickedWordPlaceholderArr.join('').toLowerCase())
+    { 
+        wins++;
+        gameRunning = false;
+        $wins.textContent = wins;
+    }
 }
 
 // Event Listener for New Game Button
@@ -93,4 +116,3 @@ document.onkeyup = function (event) {
         letterGuess(event.key);
     }
 }
-
