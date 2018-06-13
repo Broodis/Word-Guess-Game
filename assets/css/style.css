@@ -1,14 +1,17 @@
+/* Body */
 body {
     color: #FFA500;
     background-color: #FF4500;
 }
 
+/* Jumbotron/Background (Top) */
 .background {
     background-color: lightblue;
     background-image: url("../images/background.jpg");
     background-size: cover;
 }
 
+/* New Game Button */
 #new-game-button {
     outline: none;
     border: none;
@@ -35,6 +38,7 @@ body {
     top: 4px;
 }
 
+/* Placeholder Section (Middle) */
 #placeholder-section {
     background-color: #A0522D;
 }
@@ -44,3 +48,4 @@ body {
     font-size: 40px;
 
 }
+
