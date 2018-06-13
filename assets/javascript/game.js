@@ -44,11 +44,53 @@ function newGame() {
 }
 
 // Letter Guess Function
+function letterGuess(letter) {
+    console.log(letter);
 
+    if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
+        // Run Game Logic
+        guessedLetterBank.push(letter);
 
+        // Compare Guessed Letter to Chosen Word
+        for (var i = 0; i < pickedWord.length; i++) {
+            if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
+                // If character matches, replace placholder with letter
+                pickedWordPlaceholderArr[i] = pickedWord[i];
+            }
+        }
+        $placeholders.textContent = pickedWordPlaceholderArr.join('');
+        // Otherwise pass the letter to our checkIncorrect function
+        checkIncorrect(letter);
+    }
+    else {
+        if (!gameRunning) {
+            alert("Start the game by clicking on the START A NEW GAME button");
+        } else {
+            alert("You already guessed that letter, try a different one!");
+        }
+    }
+}
 
-
-
+// Incorrect Letters Function
+function checkIncorrect(letter) {
+    if (pickedWordPlaceholderArr.indexOf(letter) === -1) {
+        guessesLeft--;
+        incorrectLetterBank.push(letter);
+        // Write incorrect letters to DOM
+        $guessedLetters.textContent = incorrectLetterBank.join(' ');
+        // Write guesses left to DOM
+        $guessesLeft.textContent = guessesLeft;
+    }
+}
 
 // Event Listener for New Game Button
 $newGameButton.addEventListener('click', newGame);
+
+// OnKeyUp Event for Letter Guesses
+document.onkeyup = function (event) {
+    console.dir(event);
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+        letterGuess(event.key);
+    }
+}
+
